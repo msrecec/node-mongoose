@@ -20,7 +20,7 @@ connect.then((db) => {
     .then((dishes) => {
       console.log(dishes);
 
-      return Dishes.remove({});
+      return Dishes.deleteMany({});//deleteMany() is because remove() is deprecated
     })
     .then(() => {
       return mongoose.connection.close();
