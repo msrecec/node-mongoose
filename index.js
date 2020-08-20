@@ -7,12 +7,10 @@ const connect = mongoose.connect(url);
 
 connect.then((db) => {
   console.log('Connected correctly to server');
-  let newDish = Dishes({
+  Dishes.create({
     name: 'Uthappizza',
-    description: 'test'
-  });
-
-  newDish.save()
+    description: 'test',
+  })
     .then((dish) => {
       console.log(dish);
       return Dishes.find({}).exec();
@@ -20,12 +18,12 @@ connect.then((db) => {
     .then((dishes) => {
       console.log(dishes);
 
-      return Dishes.deleteMany({});//deleteMany() is because remove() is deprecated
+      return Dishes.deleteMany({}); //deleteMany() is because remove() is deprecated
     })
     .then(() => {
       return mongoose.connection.close();
     })
     .catch((err) => {
       console.log(err);
-    })
+    });
 });
